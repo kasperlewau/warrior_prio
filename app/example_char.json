@@ -1,0 +1,7 @@
+{
+  "weapon_min":   "1442", // The low end value of your Weapon.
+  "weapon_max":   "2163", // The top end value of your Weapon.
+  "attack_power": "4608", // Your raw attack power (buffed, unbuffed - up to you).
+  "mastery":      "533",  // Mastery value in points as seen on your character sheet (EXLUDING BASE)
+  "versatility":  "715"   // Versatility value in points as seen on your character sheet (INCLUDING BASE)
+}

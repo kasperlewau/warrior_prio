@@ -1,80 +1,56 @@
 require 'pry'
 require 'json'
+require 'formatador'
 
-module Helpers
-  class << self
-    def parse_json(file_path)
-      JSON[File.read(file_path)]
-    end
-  end
+require_relative 'modules/helpers'
+
+require_relative 'models/character'
+
+require_relative 'models/ability'
+require_relative 'models/abilities/execute'
+require_relative 'models/abilities/thunder_clap'
+require_relative 'models/abilities/whirlwind'
+require_relative 'models/abilities/mortal_strike'
+
+require_relative 'models/mod'
+require_relative 'models/mods/mastery_mod'
+require_relative 'models/mods/versatility_mod'
+
+@char    = Character.new(Helpers::parse_json(ARGV[0]))
+@targets = (ARGV[1] || 1).to_i
+
+@reg_mods = {
+  fury_hotfix: Mod.new(multiplier: 1.10), # TODO: Move into the Execute class?
+  seasoned:    Mod.new(multiplier: 1.10),
+  mastery:     Mod.new(multiplier: @char.mastery),
+  versatility: Mod.new(multiplier: @char.versatility),
+  tc_glyph:    Mod.new(multiplier: 1.5),
+  ww_hotfix:   Mod.new(multiplier: 0.70), # TODO: Move into the Whirlwind class?
+  cs:          Mod.new(multiplier: 1.35), # TODO: Implement into formulas. Conditional CLI argument?
+  sweeping:    Mod.new(multiplier: 0.50), # TODO: Implement into formulas. Based on amount of targets specified.
+}
+
+@abilities = {
+  execute_10:    Execute.new(name: 'Execute', cost: 10, base: 1.50),
+  execute_40:    Execute.new(name: 'Execute', cost: 40, base: 1.50),
+  thunder_clap:  ThunderClap.new(name: 'Thunder Clap', cost: 10, base: 1.20),
+  whirlwind:     Whirlwind.new(name: 'Whirlwind', cost: 20, base: 2.00),
+  mortal_strike: MortalStrike.new(name: 'Mortal Strike', cost: 20, base: 2.251)
+}
+
+def build_table_entry_for(ability)
+  {
+    name: ability.name,
+    cost: ability.cost,
+    raw:  ability.calc(@char, @reg_mods, @targets),
+    dpr:  ability.dpr(@char, @reg_mods, @targets),
+  }
 end
 
-module Calc
-  class << self
-    def normalize_weapon_damage(opts)
-      ((opts['weapon_min'] + opts['weapon_max']) / 2.0) + (3.3 * opts['attack_power'] / 3.5)
-    end
 
-    def execute_damage(opts)
-      # tooltip: (normalized_weapon_damge * exec_base_mod)
-      # real:    (normalized_weapon_damge * 150%)
-      # mods: mastery, seasoned_soldier, versatility, fury_hotfix
-      {
-        tooltip: (opts[:weapon] * 1.6 * DmgMod::mastery(opts[:mastery]) * DmgMod::seasoned_soldier * DmgMod::versatility(opts[:vers]) * DmgMod::fury_hotfix),
-        real: (opts[:weapon] * 1.5 * DmgMod::mastery(opts[:mastery]) * DmgMod::seasoned_soldier * DmgMod::versatility(opts[:vers]) * DmgMod::fury_hotfix)
-      }
-    end
+@table_data = @abilities.map { |k, v| build_table_entry_for(v) }
 
-    def tc_damage(opts)
-      # tooltip: (ap*.84) * 1.2
-      # real:    (ap*.84) * 1.4
-      # mods: versatility, tc_glyph, seasoned_soldier
-      {
-        tooltip: ((opts[:ap] * 0.84) * 1.2 * DmgMod::seasoned_soldier * DmgMod::tc_glyph * DmgMod::versatility(opts[:vers])),
-        real: ((opts[:ap] * 0.84) * 1.4 * DmgMod::seasoned_soldier * DmgMod::tc_glyph * DmgMod::versatility(opts[:vers]))
-      }
-    end
-
-    def ww_damage
-      # tooltip: ((normalized_wep_dmg*2)*0.7)
-      # real:    ((normalized_wep_dmg*2)*0.7)
-      # mods: seasoned_soldier, versatility_mod
-    end
-  end
-end
-
-module DmgMod
-  class << self
-    def versatility(opts)
-      ((opts * 0.011888111888111888) / 100.0 ) + 1.0
-    end
-
-    def mastery(opts)
-      ((((opts + 880) * 0.03181988743) / 100) * (5.5/3.5) ) + 1.0
-    end
-
-    def seasoned_soldier
-      1.1
-    end
-
-    def tc_glyph
-      1.5
-    end
-
-    def fury_hotfix
-      1.1
-    end
-  end
-end
-
-# Get character from file_path argument
-char = Helpers::parse_json(ARGV[0])
-char.each { |k, v| char[k] = char[k].to_f }
-
-# Store the normalized weapon damage for further calculations
-normalized_dmg = Calc::normalize_weapon_damage(char)
-
-puts 'ThunderClap: '
-puts Calc::tc_damage({ ap: char['attack_power'], vers: char['versatility'] })
-puts 'Execute: '
-puts Calc::execute_damage({ weapon: normalized_dmg, vers: char['versatility'], mastery: char['mastery'] })
+@table_data.sort_by! { |ability| ability[:dpr] }.reverse!
+Formatador.display_line()
+Formatador.display_line("[_red_][black]#{@targets}_TARGET_PRIO[/]")
+Formatador.display_table(@table_data, [:name, :cost, :raw, :dpr])
