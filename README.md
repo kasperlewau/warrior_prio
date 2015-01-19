@@ -7,11 +7,11 @@ CLI tool designed to calculate the highest DPR ability for Arms Warriors.
 
 ### Example Run
 ```
-// Runs the script with my character info, on three targets and sorts by the raw damage output.
-ruby app.rb my_character.json 3 raw
+// Runs the script with my character info, on a single target with default sorting (dpr).
+ruby app.rb my_character.json 1
 ```
 
-![example_output_image](https://s3.amazonaws.com/f.cl.ly/items/1v242s2d2B0s1b1F463R/Image%202015-01-19%20at%201.32.23%20pm.png)
+![example_output_image](https://s3.amazonaws.com/f.cl.ly/items/091q3G052y0k0X3d0Z1B/Image%202015-01-19%20at%201.57.22%20pm.png)
 
 
 ## Currently known bugs
