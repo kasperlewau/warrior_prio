@@ -1,6 +1,13 @@
 class ThunderClap < Ability
+  def initialize(args = {})
+    super
+    self.name = "#{args[:name]} #{args[:with]}"
+    self.additional_mods = args[:with] || []
+  end
+
   def filter(mods)
-    local_mods = mods.select { |k,v| ['seasoned', 'versatility', 'tc_glyph'].include? k.to_s }
+    filter     = additional_mods.concat(['seasoned', 'versatility'])
+    local_mods = mods.select { |k,v| filter.include? k.to_s }
     local_mods
   end
 

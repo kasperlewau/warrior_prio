@@ -1,11 +1,13 @@
 class Execute < Ability
   def initialize(args = {})
     super
-    self.name = "#{args[:name]}@#{args[:cost]}"
+    self.name = "#{args[:name]}@#{args[:cost]} #{args[:with]}"
+    self.additional_mods = args[:with] || []
   end
 
   def filter(mods)
-    local_mods = mods.select { |k,v| ['fury_hotfix', 'seasoned', 'mastery', 'versatility'].include? k.to_s }
+    filter     = additional_mods.concat(['fury_hotfix', 'seasoned', 'mastery', 'versatility'])
+    local_mods = mods.select { |k,v| filter.include? k.to_s }
     local_mods
   end
 
