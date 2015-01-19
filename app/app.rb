@@ -25,7 +25,7 @@ require_relative 'models/mods/versatility_mod'
   versatility: Mod.new(multiplier: @char.versatility),
   tc_glyph:    Mod.new(multiplier: 1.50), # TODO: Make it conditional.
   ww_hotfix:   Mod.new(multiplier: 0.70), # TODO: Move into the Whirlwind class?
-  cs:          Mod.new(multiplier: 1.35),
+  cs:          Mod.new(multiplier: 1.35), # TODO: Don't double dip on multitargets (i.e. should only affect current target)
   sweeping:    Mod.new(multiplier: 0.50), # TODO: Implement into formulas. Based on amount of targets specified. Own sub-class of Mod?
 }
 
