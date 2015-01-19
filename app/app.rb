@@ -18,6 +18,7 @@ require_relative 'models/mods/versatility_mod'
 
 @char    = Character.new(Helpers::parse_json(ARGV[0]))
 @targets = (ARGV[1] || 1).to_i
+@sorting = ARGV[2].to_sym unless ARGV[2].nil?
 
 @reg_mods = {
   fury_hotfix: Mod.new(multiplier: 1.10), # TODO: Move into the Execute class?
@@ -51,7 +52,7 @@ end
 
 @table_data = @abilities.map { |k, v| build_table_entry_for(v) }
 
-@table_data.sort_by! { |ability| ability[:dpr] }.reverse!
+@table_data.sort_by! { |ability| ability[@sorting || :dpr] }.reverse!
 Formatador.display_line()
 Formatador.display_line("[_red_][black]#{@targets}_TARGET_PRIO[/]")
 Formatador.display_table(@table_data, [:name, :cost, :raw, :dpr])
