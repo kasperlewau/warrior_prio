@@ -1,6 +1,4 @@
-require 'pry'
-require 'json'
-require 'formatador'
+require 'bundler/setup'
 
 require_relative 'modules/helpers'
 
