@@ -24,18 +24,19 @@ require_relative 'models/mods/versatility_mod'
   seasoned:    Mod.new(multiplier: 1.10),
   mastery:     Mod.new(multiplier: @char.mastery),
   versatility: Mod.new(multiplier: @char.versatility),
-  tc_glyph:    Mod.new(multiplier: 1.5),  # TODO: Make it conditional.
+  tc_glyph:    Mod.new(multiplier: 1.50),  # TODO: Make it conditional.
   ww_hotfix:   Mod.new(multiplier: 0.70), # TODO: Move into the Whirlwind class?
   cs:          Mod.new(multiplier: 1.35), # TODO: Implement into formulas. Conditional CLI argument?
   sweeping:    Mod.new(multiplier: 0.50), # TODO: Implement into formulas. Based on amount of targets specified.
 }
 
 @abilities = {
-  execute_10:    Execute.new(name: 'Execute', cost: 10, base: 1.50),
-  execute_40:    Execute.new(name: 'Execute', cost: 40, base: 1.50),
-  thunder_clap:  ThunderClap.new(name: 'Thunder Clap', cost: 10, base: 1.20),
-  whirlwind:     Whirlwind.new(name: 'Whirlwind', cost: 20, base: 2.00),
-  mortal_strike: MortalStrike.new(name: 'Mortal Strike', cost: 20, base: 2.251)
+  execute:       Execute.new(name: 'Execute', cost: 28.00, base: 1.50),
+  execute_10:    Execute.new(name: 'Execute', cost: 10.00, base: 1.50),
+  execute_40:    Execute.new(name: 'Execute', cost: 40.00, base: 1.50),
+  thunder_clap:  ThunderClap.new(name: 'Thunder Clap', cost: 10.00, base: 1.20),
+  whirlwind:     Whirlwind.new(name: 'Whirlwind', cost: 20.00, base: 2.00),
+  mortal_strike: MortalStrike.new(name: 'Mortal Strike', cost: 20.00, base: 2.251)
 }
 
 def build_table_entry_for(ability)
