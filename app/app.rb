@@ -24,7 +24,7 @@ require_relative 'models/mods/versatility_mod'
   seasoned:    Mod.new(multiplier: 1.10),
   mastery:     Mod.new(multiplier: @char.mastery),
   versatility: Mod.new(multiplier: @char.versatility),
-  tc_glyph:    Mod.new(multiplier: 1.5),
+  tc_glyph:    Mod.new(multiplier: 1.5),  # TODO: Make it conditional.
   ww_hotfix:   Mod.new(multiplier: 0.70), # TODO: Move into the Whirlwind class?
   cs:          Mod.new(multiplier: 1.35), # TODO: Implement into formulas. Conditional CLI argument?
   sweeping:    Mod.new(multiplier: 0.50), # TODO: Implement into formulas. Based on amount of targets specified.
