@@ -30,18 +30,18 @@ require_relative 'models/mods/versatility_mod'
 }
 
 @abilities = {
-  execute:       Execute.new(name: 'Execute', cost: 25.00, base: 1.50),
-  execute_10:    Execute.new(name: 'Execute', cost: 10.00, base: 1.50),
-  execute_40:    Execute.new(name: 'Execute', cost: 40.00, base: 1.50),
-  execute_10_cs: Execute.new(name: 'Execute', cost: 10.00, base: 1.50, with: ['cs']),
-  execute_40_cs: Execute.new(name: 'Execute', cost: 40.00, base: 1.50, with: ['cs']),
+  execute:                 Execute.new(name: 'Execute', cost: 25.00, base: 1.50),
+  execute_10:              Execute.new(name: 'Execute', cost: 10.00, base: 1.50),
+  execute_40:              Execute.new(name: 'Execute', cost: 40.00, base: 1.50),
+  execute_10_cs:           Execute.new(name: 'Execute', cost: 10.00, base: 1.50, with: ['cs']),
+  execute_40_cs:           Execute.new(name: 'Execute', cost: 40.00, base: 1.50, with: ['cs']),
   thunder_clap_glyphed_cs: ThunderClap.new(name: 'Thunder Clap', cost: 10.00, base: 1.20, with: ['tc_glyph', 'cs']),
-  thunder_clap_glyphed: ThunderClap.new(name: 'Thunder Clap', cost: 10.00, base: 1.20, with: ['tc_glyph']),
-  thunder_clap_cs: ThunderClap.new(name: 'Thunder Clap', cost: 10.00, base: 1.20, with: ['cs']),
-  thunder_clap: ThunderClap.new(name: 'Thunder Clap', cost: 10.00, base: 1.20),
-  whirlwind:     Whirlwind.new(name: 'Whirlwind', cost: 20.00, base: 2.00),
-  mortal_strike: MortalStrike.new(name: 'Mortal Strike', cost: 20.00, base: 2.251),
-  mortal_strike_cs: MortalStrike.new(name: 'Mortal Strike', cost: 20.00, base: 2.251, with: ['cs'])
+  thunder_clap_glyphed:    ThunderClap.new(name: 'Thunder Clap', cost: 10.00, base: 1.20, with: ['tc_glyph']),
+  thunder_clap_cs:         ThunderClap.new(name: 'Thunder Clap', cost: 10.00, base: 1.20, with: ['cs']),
+  thunder_clap:            ThunderClap.new(name: 'Thunder Clap', cost: 10.00, base: 1.20),
+  whirlwind:               Whirlwind.new(name: 'Whirlwind', cost: 20.00, base: 2.00),
+  mortal_strike:           MortalStrike.new(name: 'Mortal Strike', cost: 20.00, base: 2.251),
+  mortal_strike_cs:        MortalStrike.new(name: 'Mortal Strike', cost: 20.00, base: 2.251, with: ['cs'])
 }
 
 def build_table_entry_for(ability)
