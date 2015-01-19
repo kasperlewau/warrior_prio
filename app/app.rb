@@ -48,8 +48,8 @@ def build_table_entry_for(ability)
   {
     name: ability.name,
     cost: ability.cost,
-    raw:  ability.calc(@char, @reg_mods, @targets),
-    dpr:  ability.dpr(@char, @reg_mods, @targets),
+    raw:  ability.calc(@char, @reg_mods, @targets).to_f.round(2),
+    dpr:  ability.dpr(@char, @reg_mods, @targets).to_f.round(2),
   }
 end
 

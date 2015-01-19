@@ -19,6 +19,6 @@ class Ability
   end
 
   def dpr(char, mods, targets)
-    (calc(char, mods, targets) / cost).to_f.round(2)
+    (calc(char, mods, targets) / cost)
   end
 end

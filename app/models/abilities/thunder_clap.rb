@@ -13,6 +13,6 @@ class ThunderClap < Ability
 
   def calc(char, mods, targets)
     pre_mods = ((char.attack_power * 0.84) * base) * targets
-    filter(mods).values.reduce(pre_mods) { |val, mod| mod.apply(val) }.to_f.round(2)
+    filter(mods).values.reduce(pre_mods) { |val, mod| mod.apply(val) }
   end
 end

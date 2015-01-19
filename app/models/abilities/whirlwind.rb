@@ -6,6 +6,6 @@ class Whirlwind < Ability
 
   def calc(char, mods, targets)
     pre_mods = (normalize(char) * base) * targets
-    filter(mods).values.reduce(pre_mods) { |val, mod| mod.apply(val) }.to_f.round(2)
+    filter(mods).values.reduce(pre_mods) { |val, mod| mod.apply(val) }
   end
 end

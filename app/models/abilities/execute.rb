@@ -12,9 +12,8 @@ class Execute < Ability
   end
 
   def calc(char, mods, targets)
-    return @result unless @result.nil?
     pre_mods = normalize(char) * base
     pre_mods = pre_mods * ((cost/40) * 4) if cost > 10
-    @result ||= filter(mods).values.reduce(pre_mods) { |val, mod| mod.apply(val) }.to_f.round(2)
+    filter(mods).values.reduce(pre_mods) { |val, mod| mod.apply(val) }
   end
 end
