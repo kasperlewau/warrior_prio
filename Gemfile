@@ -1,5 +1,6 @@
 source "https://rubygems.org"
 
-require 'pry'
-require 'json'
-require 'formatador'
+gem 'pry'
+gem 'json'
+gem 'formatador'
+gem 'ocra'
