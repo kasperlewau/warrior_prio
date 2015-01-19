@@ -57,6 +57,7 @@ end
 @table_data = @abilities.map { |k, v| build_table_entry_for(v) }
 
 @table_data.sort_by! { |ability| ability[@sorting || :dpr] }.reverse!
+Formatador.display_line("[_black_][red]Arms Warrior DPR Calc v.0.1[/]")
 Formatador.display_line()
 Formatador.display_line("[_red_][black]#{@targets}_TARGET_PRIO[/]")
 Formatador.display_table(@table_data, [:name, :cost, :raw, :dpr])
