@@ -1,59 +1,11 @@
 ## Ability prio calculator for WoW Warriors.
 CLI tool designed to calculate the highest DPR ability for Arms Warriors.
 
-### Steps
+### [Installation Instructions](docs/installation.md)
 
-**For the time being, this script is restricted to being used on UNIX based machines (or Windows, if you can install Ruby on it (good luck...)).**
+### [Execution Instructions](docs/execution.md)
 
-* Clone the repo (or download as .zip)
-```
-git clone git@github.com:RushPlay/casino-saga.git
-https://github.com/kasperlewau/warrior_prio/archive/master.zip
-```
-* [Install Ruby](https://www.ruby-lang.org/en/documentation/installation/)
-* Install the correct version of Ruby
-
->There is currently no specified Ruby version for the script, as such it may run on older versions.
-Developed under Ruby 2.1.5
-
-* Install the Bundler gem
-```
-gem install bundler
-```
-* CD into the root directory of the script.
-* Install the bundle.
-```
-bundle install
-```
-* Input your charcter data into a .json file
-```
-{
-  // The low end value of your Weapon.
-  "weapon_min":   "1442",
-  // The top end value of your Weapon.
-  "weapon_max":   "2163",
-  // Your raw attack power (buffed, unbuffed - up to you).
-  "attack_power": "4608",
-  // Mastery value in points as seen on your character sheet (EXLUDING BASE)
-  "mastery":      "533",
-  // Versatility value in points as seen on your character sheet (INCLUDING BASE)
-  "versatility":  "715"
-}
-```
-* Run the script
-```ruby app.rb [character] [targets] [sorting]``` where
-  * **[character]** is the .json file you just created
-  * **[targets]** is the amount of targets you wish to calculate for
-    * *Defaults to 1*
-  * **[sorting]** is the parameter you wish to sort the output table by. Can be one of
-    * *Defaults to DPR.*
-    * 'name' - Spell Name
-    * 'cost' - Rage cost for spell
-    * 'raw'  - Raw damage output
-    * 'dpr'  - Damage per rage
-
-
-### Example
+### Example Run
 ```
 // Runs the script with my character info, on three targets and sorts by the raw damage output.
 ruby app.rb my_character.json 3 raw
