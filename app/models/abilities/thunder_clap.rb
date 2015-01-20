@@ -1,18 +1,21 @@
 class ThunderClap < Ability
+  @@ability_mods = []
+
   def initialize(args = {})
     super
-    self.name = "#{args[:name]} #{args[:with]}"
-    self.additional_mods = args[:with] || []
+    mods.concat(@@ability_mods).concat(args[:with] || []).uniq!
   end
 
   def filter(mods)
-    filter     = additional_mods.concat(['seasoned', 'versatility'])
-    local_mods = mods.select { |k,v| filter.include? k.to_s }
-    local_mods
+    mods.select { |k,v| self.mods.include? k.to_s }
+  end
+
+  def apply_mods(value, mods)
+    mods.values.reduce(value) { |val, mod| mod.apply(val) }
   end
 
   def calc(char, mods, targets)
-    pre_mods = ((char.attack_power * 0.84) * base) * targets
-    filter(mods).values.reduce(pre_mods) { |val, mod| mod.apply(val) }
+    value = ((char.attack_power * 0.84) * base) * targets
+    apply_mods(value, filter(mods))
   end
 end
