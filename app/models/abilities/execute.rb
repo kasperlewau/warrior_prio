@@ -1,5 +1,5 @@
 class Execute < Ability
-  @@ability_mods = ['mastery', 'fury_hotfix']
+  @@ability_mods = ['mastery', 'fury_execute_hotfix']
 
   def initialize(args = {})
     super

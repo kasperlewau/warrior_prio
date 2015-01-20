@@ -8,11 +8,11 @@ require_relative 'requires'
 @sorting = ARGV[2].to_sym unless ARGV[2].nil?
 
 @reg_mods = {
-  fury_hotfix: Mod.new(multiplier: 1.10), # TODO: Move into the Execute class?
+  fury_execute_hotfix: Mod.new(multiplier: 1.10),
   seasoned:    Mod.new(multiplier: 1.10),
   mastery:     Mod.new(multiplier: @char.mastery),
   versatility: Mod.new(multiplier: @char.versatility),
-  tc_glyph:    Mod.new(multiplier: 1.50), # TODO: Make it conditional.
+  tc_glyph:    Mod.new(multiplier: 1.50),
   ww_hotfix:   Mod.new(multiplier: 0.70), # TODO: Move into the Whirlwind class?
   cs:          Mod.new(multiplier: 1.35), # TODO: Don't double dip on multitargets (i.e. should only affect current target)
 }
