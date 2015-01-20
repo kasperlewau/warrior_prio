@@ -42,13 +42,12 @@ require_relative 'models/mods/versatility_mod'
   thunder_clap:            ThunderClap.new(name: 'Thunder Clap', cost: 10.00, base: 1.40),
   whirlwind:               Whirlwind.new(name: 'Whirlwind', cost: 20.00, base: 2.00),
   mortal_strike:           MortalStrike.new(name: 'Mortal Strike', cost: 20.00, base: 2.251),
-  mortal_strike_cs:        MortalStrike.new(name: 'Mortal Strike', cost: 20.00, base: 2.251, with: ['cs'])
 }
 
 def build_table_entry_for(ability)
   {
     name: ability.name,
-    cost: ability.cost,
+    cost: ability.cost.to_i,
     raw:  ability.calc(@char, @reg_mods, @targets).to_f.round(2),
     dpr:  ability.dpr(@char, @reg_mods, @targets).to_f.round(2),
   }
