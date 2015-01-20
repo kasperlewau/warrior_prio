@@ -13,7 +13,7 @@ require_relative 'requires'
   mastery:     Mod.new(multiplier: @char.mastery),
   versatility: Mod.new(multiplier: @char.versatility),
   tc_glyph:    Mod.new(multiplier: 1.50),
-  ww_hotfix:   Mod.new(multiplier: 0.70), # TODO: Move into the Whirlwind class?
+  ww_hotfix:   Mod.new(multiplier: 0.70),
   cs:          Mod.new(multiplier: 1.35), # TODO: Don't double dip on multitargets (i.e. should only affect current target)
 }
 
