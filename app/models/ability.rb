@@ -5,7 +5,7 @@ class Ability
 
   def initialize(args = {})
     self.base  = args[:base]
-    self.name  = args[:name]
+    self.name  = "#{args[:name]} #{args[:with]}"
     self.mods  = Array(args[:mods]).concat(DEFAULT_MODS)
     self.cost  = args[:cost]
   end
