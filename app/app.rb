@@ -16,7 +16,8 @@ require_relative 'models/mods/mastery_mod'
 require_relative 'models/mods/versatility_mod'
 
 @char    = Character.new(Helpers::parse_json(ARGV[0]))
-@targets = (ARGV[1] || 1).to_i
+@targets = (ARGV[1] || 1).to_f
+@targets = @targets + 0.5 if @targets > 1
 @sorting = ARGV[2].to_sym unless ARGV[2].nil?
 
 @reg_mods = {
@@ -27,7 +28,6 @@ require_relative 'models/mods/versatility_mod'
   tc_glyph:    Mod.new(multiplier: 1.50), # TODO: Make it conditional.
   ww_hotfix:   Mod.new(multiplier: 0.70), # TODO: Move into the Whirlwind class?
   cs:          Mod.new(multiplier: 1.35), # TODO: Don't double dip on multitargets (i.e. should only affect current target)
-  sweeping:    Mod.new(multiplier: 0.50), # TODO: Implement into formulas. Based on amount of targets specified. Own sub-class of Mod?
 }
 
 @abilities = {
@@ -60,5 +60,5 @@ end
 @table_data.sort_by! { |ability| ability[@sorting || :dpr] }.reverse!
 Formatador.display_line("[_black_][red]Arms Warrior DPR Calc v.0.1[/]")
 Formatador.display_line()
-Formatador.display_line("[_red_][black]#{@targets}_TARGET_PRIO[/]")
+Formatador.display_line("[_red_][black]#{@targets.to_i}_TARGET_PRIO[/]")
 Formatador.display_table(@table_data, [:name, :cost, :raw, :dpr])
