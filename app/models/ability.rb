@@ -1,7 +1,7 @@
 class Ability
   DEFAULT_MODS = ['seasoned', 'versatility']
 
-  attr_accessor :name, :base, :cost, :mods, :additional_mods
+  attr_accessor :name, :base, :cost, :mods, :ability_mods
 
   def initialize(args = {})
     self.base  = args[:base]

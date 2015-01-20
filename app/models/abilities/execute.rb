@@ -1,19 +1,22 @@
 class Execute < Ability
+  @@ability_mods = ['mastery', 'fury_hotfix']
+
   def initialize(args = {})
     super
-    self.name = "#{args[:name]}@#{args[:cost]} #{args[:with]}"
-    self.additional_mods = args[:with] || []
+    mods.concat(@@ability_mods).concat(args[:with] || []).uniq!
   end
 
   def filter(mods)
-    filter     = additional_mods.concat(['fury_hotfix', 'seasoned', 'mastery', 'versatility'])
-    local_mods = mods.select { |k,v| filter.include? k.to_s }
-    local_mods
+    mods.select { |k,v| self.mods.include? k.to_s }
+  end
+
+  def apply_mods(value, mods)
+    mods.values.reduce(value) { |val, mod|  mod.apply(val) }
   end
 
   def calc(char, mods, targets)
-    pre_mods = normalize(char) * base
-    pre_mods = pre_mods * ((cost/40) * 4) if cost > 10
-    filter(mods).values.reduce(pre_mods) { |val, mod| mod.apply(val) }
+    value = (normalize(char) * base)
+    value = value * ((cost/40) * 4) if cost > 10
+    apply_mods(value, filter(mods))
   end
 end
