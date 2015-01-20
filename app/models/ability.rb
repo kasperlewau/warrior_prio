@@ -17,4 +17,13 @@ class Ability
   def dpr(char, mods, targets)
     (calc(char, mods, targets) / cost)
   end
+
+  def table_data(char, mods, targets)
+    {
+      name: name,
+      cost: cost.to_i,
+      raw:  calc(char, mods, targets).to_f.round(2),
+      dpr:  dpr(char, mods, targets).to_f.round(2),
+    }
+  end
 end

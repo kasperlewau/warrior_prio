@@ -44,19 +44,10 @@ require_relative 'models/mods/versatility_mod'
   mortal_strike:           MortalStrike.new(name: 'Mortal Strike', cost: 20.00, base: 2.251),
 }
 
-def build_table_entry_for(ability)
-  {
-    name: ability.name,
-    cost: ability.cost.to_i,
-    raw:  ability.calc(@char, @reg_mods, @targets).to_f.round(2),
-    dpr:  ability.dpr(@char, @reg_mods, @targets).to_f.round(2),
-  }
-end
-
-
-@table_data = @abilities.map { |k, v| build_table_entry_for(v) }
+@table_data = @abilities.map { |k, ability| ability.table_data(@char, @reg_mods, @targets) }
 
 @table_data.sort_by! { |ability| ability[@sorting || :dpr] }.reverse!
+
 Formatador.display_line("[_black_][red]Arms Warrior DPR Calc v.0.1[/]")
 Formatador.display_line()
 Formatador.display_line("[_red_][black]#{@targets.to_i}_TARGET_PRIO[/]")
