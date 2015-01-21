@@ -18,18 +18,17 @@ require_relative 'requires'
 }
 
 @abilities = {
-  # execute:                 Execute.new(name: 'Execute', cost: 25.00, base: 1.50),
-  # execute_10:              Execute.new(name: 'Execute', cost: 10.00, base: 1.50),
-  # execute_40:              Execute.new(name: 'Execute', cost: 40.00, base: 1.50),
-  # execute_10_cs:           Execute.new(name: 'Execute', cost: 10.00, base: 1.50, with: ['cs']),
-  # execute_40_cs:           Execute.new(name: 'Execute', cost: 40.00, base: 1.50, with: ['cs']),
-  # thunder_clap_glyphed_cs: ThunderClap.new(name: 'Thunder Clap', cost: 10.00, base: 1.40, with: ['cs', 'tc_glyph']),
-  thunder_clap_glyphed:    ThunderClap.new(name: 'Thunder Clap', cost: 10.00, base: 1.40, with: ['tc_glyph']),
-  thunder_clap_cs:         ThunderClap.new(name: 'Thunder Clap', cost: 10.00, base: 1.40, with: ['cs']),
-  thunder_clap:            ThunderClap.new(name: 'Thunder Clap', cost: 10.00, base: 1.40),
-  # whirlwind:               Whirlwind.new(name: 'Whirlwind', cost: 20.00, base: 2.00),
-  # ms:              MortalStrike.new(name: 'Mortal Strike', cost: 20.00, base: 2.251),
-  # ms_cs:           MortalStrike.new(name: 'Mortal Strike', cost: 20.00, base: 2.251, with: ['cs'])
+  ww:       Whirlwind.new(name: 'Whirlwind', cost: 20.00, base: 2.00),
+  ms:       MortalStrike.new(name: 'Mortal Strike', cost: 20.00, base: 2.251),
+  ms_cs:    MortalStrike.new(name: 'Mortal Strike', cost: 20.00, base: 2.251, with: ['cs']),
+  tc:       ThunderClap.new(name: 'Thunder Clap', cost: 10.00, base: 1.40),
+  tc_cs:    ThunderClap.new(name: 'Thunder Clap', cost: 10.00, base: 1.40, with: ['cs']),
+  tc_g:     ThunderClap.new(name: 'Thunder Clap', cost: 10.00, base: 1.40, with: ['tc_glyph']),
+  tc_g_cs:  ThunderClap.new(name: 'Thunder Clap', cost: 10.00, base: 1.40, with: ['cs', 'tc_glyph']),
+  ex_10:    Execute.new(name: 'Execute', cost: 10.00, base: 1.50),
+  ex_40:    Execute.new(name: 'Execute', cost: 40.00, base: 1.50),
+  ex_10_cs: Execute.new(name: 'Execute', cost: 10.00, base: 1.50, with: ['cs']),
+  ex_40_cs: Execute.new(name: 'Execute', cost: 40.00, base: 1.50, with: ['cs'])
 }
 
 @table_data = @abilities.map { |k, ability| ability.table_data(@char, @reg_mods, @targets) }
