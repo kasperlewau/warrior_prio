@@ -21,6 +21,7 @@ class MortalStrike < Ability
 
   def calc(char, mods, targets)
     targets = get_targets(targets)
-    apply_mods(((normalize(char) * base) * targets), filter(mods), targets)
+    value   = ((normalize(char) * base) * targets)
+    apply_mods(value, filter(mods), targets)
   end
 end
