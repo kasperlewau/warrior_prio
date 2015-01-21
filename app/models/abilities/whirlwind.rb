@@ -5,11 +5,12 @@ class Whirlwind < Ability
     mods.select { |k,v| self.mods.include? k.to_s }
   end
 
-  def apply_mods(value, mods)
-    mods.values.reduce(value) { |val, mod| mod.apply(val) }
+  def apply_mods(value, mods, targets)
+    mods.values.reduce(value) { |val, mod| mod.apply(val, targets) }
   end
 
   def calc(char, mods, targets)
-    apply_mods(((normalize(char) * base) * targets.to_i), filter(mods))
+    value = ((normalize(char) * base) * target.to_i)
+    apply_mods(value, filter(mods), targets.to_i)
   end
 end
