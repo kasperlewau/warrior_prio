@@ -2,11 +2,6 @@ class MortalStrike < Ability
   @@max_targets  = 1.5
   @@ability_mods = ['mastery']
 
-  def initialize(args = {})
-    super
-    mods.concat(@@ability_mods).concat(args[:with] || []).uniq!
-  end
-
   def filter(mods)
     mods.select { |k,v| self.mods.include? k.to_s }
   end

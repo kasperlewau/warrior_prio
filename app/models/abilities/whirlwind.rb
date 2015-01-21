@@ -1,11 +1,6 @@
 class Whirlwind < Ability
   @@ability_mods = ['ww_hotfix']
 
-  def initialize(args = {})
-    super
-    mods.concat(@@ability_mods).concat(args[:with] || []).uniq!
-  end
-
   def filter(mods)
     mods.select { |k,v| self.mods.include? k.to_s }
   end
