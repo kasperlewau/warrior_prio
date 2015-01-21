@@ -14,7 +14,7 @@ require_relative 'requires'
   versatility: Mod.new(multiplier: @char.versatility),
   tc_glyph:    Mod.new(multiplier: 1.50),
   ww_hotfix:   Mod.new(multiplier: 0.70),
-  cs:          CsMod.new(multiplier: 1.35, targets: @targets)
+  cs:          CsMod.new(multiplier: 1.3497, targets: @targets)
 }
 
 @abilities = {
