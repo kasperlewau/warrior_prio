@@ -5,7 +5,7 @@ class Mod
     self.multiplier = args[:multiplier]
   end
 
-  def apply(value)
+  def apply(value, targets = nil)
     value * multiplier
   end
 end

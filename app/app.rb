@@ -14,21 +14,22 @@ require_relative 'requires'
   versatility: Mod.new(multiplier: @char.versatility),
   tc_glyph:    Mod.new(multiplier: 1.50),
   ww_hotfix:   Mod.new(multiplier: 0.70),
-  cs:          Mod.new(multiplier: 1.35), # TODO: Don't double dip on multitargets (i.e. should only affect current target)
+  cs:          CsMod.new(multiplier: 1.35, targets: @targets)
 }
 
 @abilities = {
-  execute:                 Execute.new(name: 'Execute', cost: 25.00, base: 1.50),
-  execute_10:              Execute.new(name: 'Execute', cost: 10.00, base: 1.50),
-  execute_40:              Execute.new(name: 'Execute', cost: 40.00, base: 1.50),
-  execute_10_cs:           Execute.new(name: 'Execute', cost: 10.00, base: 1.50, with: ['cs']),
-  execute_40_cs:           Execute.new(name: 'Execute', cost: 40.00, base: 1.50, with: ['cs']),
-  thunder_clap_glyphed_cs: ThunderClap.new(name: 'Thunder Clap', cost: 10.00, base: 1.40, with: ['tc_glyph', 'cs']),
+  # execute:                 Execute.new(name: 'Execute', cost: 25.00, base: 1.50),
+  # execute_10:              Execute.new(name: 'Execute', cost: 10.00, base: 1.50),
+  # execute_40:              Execute.new(name: 'Execute', cost: 40.00, base: 1.50),
+  # execute_10_cs:           Execute.new(name: 'Execute', cost: 10.00, base: 1.50, with: ['cs']),
+  # execute_40_cs:           Execute.new(name: 'Execute', cost: 40.00, base: 1.50, with: ['cs']),
+  # thunder_clap_glyphed_cs: ThunderClap.new(name: 'Thunder Clap', cost: 10.00, base: 1.40, with: ['cs', 'tc_glyph']),
   thunder_clap_glyphed:    ThunderClap.new(name: 'Thunder Clap', cost: 10.00, base: 1.40, with: ['tc_glyph']),
   thunder_clap_cs:         ThunderClap.new(name: 'Thunder Clap', cost: 10.00, base: 1.40, with: ['cs']),
   thunder_clap:            ThunderClap.new(name: 'Thunder Clap', cost: 10.00, base: 1.40),
-  whirlwind:               Whirlwind.new(name: 'Whirlwind', cost: 20.00, base: 2.00),
-  mortal_strike:           MortalStrike.new(name: 'Mortal Strike', cost: 20.00, base: 2.251),
+  # whirlwind:               Whirlwind.new(name: 'Whirlwind', cost: 20.00, base: 2.00),
+  # ms:              MortalStrike.new(name: 'Mortal Strike', cost: 20.00, base: 2.251),
+  # ms_cs:           MortalStrike.new(name: 'Mortal Strike', cost: 20.00, base: 2.251, with: ['cs'])
 }
 
 @table_data = @abilities.map { |k, ability| ability.table_data(@char, @reg_mods, @targets) }

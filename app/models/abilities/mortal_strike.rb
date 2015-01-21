@@ -1,4 +1,5 @@
 class MortalStrike < Ability
+  @@max_targets  = 1.5
   @@ability_mods = ['mastery']
 
   def initialize(args = {})
@@ -10,11 +11,16 @@ class MortalStrike < Ability
     mods.select { |k,v| self.mods.include? k.to_s }
   end
 
-  def apply_mods(value, mods)
-    mods.values.reduce(value) { |val, mod|  mod.apply(val) }
+  def apply_mods(value, mods, targets)
+    mods.values.reduce(value) { |val, mod|  mod.apply(val, targets) }
+  end
+
+  def get_targets(targets)
+    targets > @@max_targets ? @@max_targets : targets
   end
 
   def calc(char, mods, targets)
-    apply_mods((normalize(char) * base), filter(mods))
+    targets = get_targets(targets)
+    apply_mods(((normalize(char) * base) * targets), filter(mods), targets)
   end
 end
