@@ -15,6 +15,6 @@ class Whirlwind < Ability
   end
 
   def calc(char, mods, targets)
-    apply_mods(((normalize(char) * base) * targets), filter(mods))
+    apply_mods(((normalize(char) * base) * targets.to_i), filter(mods))
   end
 end

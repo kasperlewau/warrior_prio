@@ -15,7 +15,7 @@ class ThunderClap < Ability
   end
 
   def calc(char, mods, targets)
-    value = ((char.attack_power * 0.84) * base) * targets
-    apply_mods(value, filter(mods), targets)
+    value = ((char.attack_power * 0.84) * base) * targets.to_i
+    apply_mods(value, filter(mods), targets.to_i)
   end
 end
