@@ -1,6 +1,11 @@
 class MortalStrike < Ability
-  @@max_targets  = 1.5
-  @@ability_mods = ['mastery']
+
+  def initialize(args = {})
+    super
+    @max_targets   = 1.5
+    @ability_mods  = ['mastery']
+    mods.concat(@ability_mods).concat(args[:with] || []).uniq!
+  end
 
   def filter(mods)
     mods.select { |k,v| self.mods.include? k.to_s }
@@ -11,7 +16,7 @@ class MortalStrike < Ability
   end
 
   def get_targets(targets)
-    targets > @@max_targets ? @@max_targets : targets
+    targets > @max_targets ? @max_targets : targets
   end
 
   def calc(char, mods, targets)

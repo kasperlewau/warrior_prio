@@ -1,6 +1,11 @@
 class Execute < Ability
-  @@max_targets  = 1.5
-  @@ability_mods = ['mastery', 'fury_execute_hotfix']
+
+  def initialize(args = {})
+    super
+    @ability_mods = ['mastery', 'fury_execute_hotfix']
+    @max_targets = 1.5
+    mods.concat(@ability_mods).concat(args[:with] || []).uniq!
+  end
 
   def filter(mods)
     mods.select { |k,v| self.mods.include? k.to_s }
@@ -11,7 +16,7 @@ class Execute < Ability
   end
 
   def get_targets(targets)
-    targets > @@max_targets ? @@max_targets : targets
+    targets > @max_targets ? @max_targets : targets
   end
 
   def calc(char, mods, targets)

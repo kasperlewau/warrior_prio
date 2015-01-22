@@ -1,16 +1,12 @@
 class Ability
-  DEFAULT_MODS   = ['seasoned', 'versatility']
-  @@ability_mods = nil
-
-  attr_accessor :name, :base, :cost, :mods
+  DEFAULT_MODS = ['seasoned', 'versatility']
+  attr_accessor :name, :base, :cost, :mods, :ability_mods, :max_targets
 
   def initialize(args = {})
     self.base  = args[:base]
     self.name  = "#{args[:name]} #{args[:with]}"
     self.mods  = Array(args[:mods]).concat(DEFAULT_MODS)
     self.cost  = args[:cost]
-
-    mods.concat(@@ability_mods).concat(args[:with] || []).uniq!
   end
 
   def normalize(char)
